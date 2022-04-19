@@ -1,75 +1,64 @@
 package com.itproger;
 
+import android.content.DialogInterface;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
-    private TextView resultTextView;
-    private EditText numberField1, numberField2;
-    private Button plusButton;
-    private Button minusButton;
-    private Button multButton;
-    private Button divideButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        resultTextView = findViewById(R.id.resultTextView);
-        numberField1 = findViewById(R.id.number_field_1);
-        numberField2 = findViewById(R.id.number_field_2);
-
-//        plusButton.setOnClickListener(view -> {
-//            String firstNumString = numberField1.getText().toString();
-//            float num1 = Float.parseFloat(firstNumString.isEmpty() ? "0" : firstNumString);
-//            String secondNumString = numberField2.getText().toString();
-//            float num2 = Float.parseFloat(secondNumString.isEmpty() ? "0" : secondNumString);
-//            float res = num1 + num2;
-//            resultTextView.setText(String.valueOf(res));
-//        });
+        TextView mainText = findViewById(R.id.main_text);
+        Button btnSecond = findViewById(R.id.btn_second);
+        btnSecond.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                showInfo(mainText.getText().toString(), btnSecond);
+                showInfoAlert("Вы хотите закрыть приложение?");
+            }
+        });
     }
 
-    public void onButtonClick(View v) {
-        EditText el1 = findViewById(R.id.number_field_1);
-        EditText el2 = findViewById(R.id.number_field_2);
-        TextView resText = findViewById(R.id.resultTextView);
+    public void btnClick(View v) {
+        showInfo(((Button) v).getText().toString(), ((Button) v));
+    }
 
-        int num1 = Integer.parseInt(el1.getText().toString());
-        int num2 = Integer.parseInt(el2.getText().toString());
+    private void showInfoAlert(String text) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("Большая подсказка")
+                .setMessage(text)
+                .setCancelable(false)
+                .setPositiveButton("Конечно", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("Нет", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
-        int result;
-        String textShow = "";
-
-        switch (v.getId()) {
-            case R.id.plus_button:
-                result = num1 + num2;
-                textShow = "Сумма = " + result;
-                break;
-            case R.id.minus_button:
-                result = num1 - num2;
-                textShow = "Разница = " + result;
-                break;
-            case R.id.mult_button:
-                result = num1 * num2;
-                textShow = "Произведение = " + result;
-                break;
-            case R.id.divide_button:
-                if (num2 != 0) {
-                    result = num1 / num2;
-                    textShow = "Частное = " + result;
-                } else
-                    textShow = "Нельзя делить на 0!";
-                break;
-        }
-
-        resText.setText(textShow);
+    private void showInfo(String text, Button btn) {
+        btn.setText("Уже нажали");
+        btn.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+        Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
 }
