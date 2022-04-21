@@ -112,5 +112,4 @@ public class MainActivity extends AppCompatActivity {
         btn.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
-
 }
