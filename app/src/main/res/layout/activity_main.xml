@@ -5,7 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     tools:context=".MainActivity" >
+
+    <!--    android:clickable="true" - это чтобы скрывать клавиатуру при нажатии вне поля -->
+    <!--    android:focusableInTouchMode="true" - это тоже -->
 
     <TextView
         android:id="@+id/main_text"
@@ -23,8 +28,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/linearLayout"
+        android:layout_width="351dp"
+        android:layout_height="208dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="25dp"
@@ -64,4 +70,42 @@
             android:onClick="btnClick"
             android:text="Кнопка 3" />
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="Enter password"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <EditText
+        android:id="@+id/pass_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Confirm password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pass" />
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:onClick="btnExitClick"
+        android:text="@string/btn_exit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pass_confirm" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
