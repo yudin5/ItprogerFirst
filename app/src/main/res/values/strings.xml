@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ItprogerFirst</string>
     <string name="logo">Просто текст</string>
+    <string name="btn_exit_text">Выход</string>
 </resources>
